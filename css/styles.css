@@ -1,0 +1,7 @@
+/* Project-specific styles that complement Tailwind utility classes. */
+body { background: #f6f8fb; }
+.gauge { background: conic-gradient(var(--gauge-color) calc(var(--score-pct) * 1%), #e7edf4 0); }
+.gauge::after { content: ''; position: absolute; inset: 13px; background: #fff; border-radius: 50%; }
+.step-dot.active { background: #0b8f78; border-color: #0b8f78; color: #fff; }
+.answer-option.selected { border-color: #0b8f78; background: #e9f7f4; box-shadow: 0 0 0 1px #0b8f78; }
+input[type='range'] { accent-color: #0b8f78; }
