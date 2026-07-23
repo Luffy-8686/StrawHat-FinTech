@@ -35,6 +35,26 @@ app.use(cors({
 app.use(morgan('dev'));
 app.use(express.json());
 
+// Root route — shows API info instead of 404
+app.get('/', (req, res) => {
+  res.json({
+    name: 'CreditVision FinTech API',
+    status: '✅ Running',
+    version: '1.0.0',
+    description: 'Credit Scoring & Micro-Investment Advisor — TetraTHON 2026',
+    endpoints: {
+      health:      'GET  /api/health',
+      creditScore: 'POST /api/credit-score',
+      questions:   'GET  /api/risk-profile/questions',
+      riskProfile: 'POST /api/risk-profile',
+      investment:  'POST /api/investment-advice',
+      profiles:    'GET  /api/dashboard/profiles',
+      stats:       'GET  /api/dashboard/stats',
+    },
+    timestamp: new Date().toISOString(),
+  });
+});
+
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({
