@@ -1,15 +1,21 @@
 import axios from 'axios';
 
-// In production: VITE_API_URL = your Render backend URL (e.g. https://creditvision-api.onrender.com)
-// In local dev:  proxy in vite.config.js forwards /api → http://localhost:5000
-const BASE_URL = import.meta.env.VITE_API_URL
-  ? `${import.meta.env.VITE_API_URL}/api`
-  : '/api';
+// Production backend on Render
+const PRODUCTION_API = 'https://strawhat-fintech.onrender.com';
+
+// In local dev: Vite proxy forwards /api → localhost:5000
+// In production (Vercel): use the Render backend URL
+const isLocalhost = typeof window !== 'undefined' &&
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+const BASE_URL = isLocalhost
+  ? '/api'
+  : (import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : `${PRODUCTION_API}/api`);
 
 const api = axios.create({
   baseURL: BASE_URL,
   headers: { 'Content-Type': 'application/json' },
-  timeout: 15000,
+  timeout: 30000, // 30s — Render free tier can take ~20s to wake from sleep
 });
 
 // Request interceptor for logging
