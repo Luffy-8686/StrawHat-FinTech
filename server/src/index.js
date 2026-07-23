@@ -16,7 +16,8 @@ const PORT = process.env.PORT || 5000;
 const ALLOWED_ORIGINS = [
   'http://localhost:5173',
   'http://localhost:3000',
-  process.env.CLIENT_URL, // Set this in Render dashboard to your Vercel URL
+  'https://straw-hat-fin-tech.vercel.app',   // Production Vercel frontend
+  process.env.CLIENT_URL,                     // Optional override via env var
 ].filter(Boolean);
 
 // Middleware
